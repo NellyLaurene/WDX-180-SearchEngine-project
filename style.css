@@ -1,0 +1,20 @@
+.bubble {
+    display: inline-block;
+    height: 1.3rem;
+    width: 1.3rem;
+    background-color: magenta;
+    align-items: center;
+    text-align: center;
+    line-height: 1.1rem;
+    border-radius: 50%;
+    color: black;
+    font-weight: bold;
+}
+.invisible {
+    display: none;
+}
+.results{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

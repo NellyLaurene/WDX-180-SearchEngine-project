@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First phase of WDX-180</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <label for="book-choice">Choose a Book Genre</label>
+    <input list="book-list" id="book-choice" type="text" name="book-choice">
+    <datalist id="book-list">
+
+    </datalist>
+
+    <button class="total">Find Total</button>
+    <button class="reset">Reset</button>
+
+    <div class="results">
+        <p>Results: </p>
+        <span class="bubble">0</span>
+    </div>
+
+    <hr>
+
+    <details id="genre1" open>
+        <summary>
+            Fiction
+            <span class="bubble invisible"></span>
+        </summary>
+        <ul id="list1">
+        </ul>
+    </details>
+    
+    <details id="genre2">
+        <summary>
+            Non-fiction
+            <span class="bubble invisible"></span>
+        </summary>
+        <ul id="list2">
+            <!-- <li>Biography</li>
+            <li>Memoir</li>
+            <li>Self-help</li>
+            <li>True Crime</li>
+            <li>Business/Finance</li> -->
+        </ul>
+    </details>
+    
+    <details id="genre3">
+        <summary>
+            Fantasy
+            <span class="bubble invisible"></span>
+        </summary>
+        <ul id="list3">
+            <!-- <li>Epic Fantasy</li>
+            <li>Urban Fantasy</li>
+            <li>High Fantasy</li>
+            <li>Dark Fantasy</li>
+            <li>Magical Realism</li> -->
+        </ul>
+    </details>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
