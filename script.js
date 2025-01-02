@@ -25,7 +25,6 @@ for(let i=0; i < optionList.length; i++) {
 
 
 // Adding Genre list on the page from the array dynamically
-
 const fictionList = ['Mystery', 'Thriller', 'Romance', 'Historical Fiction', 'Literary Fiction'];
 const nonFictionList = ['Biography', 'Memoir', 'Self-help', 'True Crime', 'Business/Finance'];
 const fantasyList = ['Epic Fantasy', 'High Fantasy', 'Low Fantasy', 'Magical Realism', 'Urban Fantasy']; 
@@ -38,37 +37,45 @@ function addItem (ulList, arrayList) {
     }
 }
 
-
 // Event Listeners
 
 function initApp() {
 
     // Function to handle each list box functionality instead of repeating it 3 times
-    function listFunctionality(array, listItem, inputValue) {
-        let counter = 0;
+    function listFunctionality(arrayOfGerne, liTagInArray, inputValue) {
 
-        // Starting by setting the color of each item to white before the inpput event
-        listItem.forEach(i => {
-            i.style.color = 'white';
-        });
+       let counter = 0;
 
-        // Turning the list that matches the input value from our array to magenta
-        for (let i = 0; i < array.length; i++) {
-            if (array[i].toLowerCase().includes(inputValue)) {
+       // Reset of the list
+        liTagInArray.forEach(li => {
+            li.style.color = 'white';
+            li.innerHTML = arrayOfGerne[arrayOfGerne.indexOf(li.textContent)]; // To set back the array element as it was without the formatting
+        })
+
+        // Lopping through the array
+        for(let i=0; i < arrayOfGerne.length; i++) {
+            const genreItem = arrayOfGerne[i].toLowerCase();
+
+            if(genreItem.includes(inputValue)) {
                 counter++;
-                listItem[i].style.color = 'magenta';
+
+                const startIndex = genreItem.indexOf(inputValue);
+                const endIndex = startIndex + inputValue.length;
+
+                const beforeMatch = arrayOfGerne[i].slice(0, startIndex);
+                const match = arrayOfGerne[i].slice(startIndex, endIndex);
+                const afterMatch = arrayOfGerne[i].slice(endIndex);
+
+                liTagInArray[i].innerHTML = `${beforeMatch}<span style="color:magenta">${match}</span>${afterMatch}`
             }
         }
 
-        // Making the list color to white when the person deletes all things and counter to 0
-        if (inputValue === '') {
-            listItem.forEach(li => {
+        if(inputValue === '') {
+            liTagInArray.forEach(li => {
                 li.style.color = 'white';
-            });
+            })
             counter = 0;
         }
-
-        // Returning counter to help with the total counter for each list box
         return counter;
     }
 
@@ -128,40 +135,39 @@ function initApp() {
         if (inputValue === '') {
             resultBubble.textContent = 0; 
         }
-    }) 
-
-    // function changeHandler() {
-    //     const inputValue = inputBox.value.toLowerCase(); 
-
-    //     const counter = inputHandler(); 
-    //     resultBubble.textContent = counter; 
-
-    //     if (inputValue === '') {
-    //         resultBubble.textContent = 0; 
-    //     }
-    // }
+    });
 
     // Reset button functionality
     reset.addEventListener('click', () => {
         const inputValue = inputBox.value.toLowerCase(); 
         const list = document.querySelectorAll('ul li');
+        const spans = document.querySelectorAll('li span');
 
+        // Change the result back to 0
         resultBubble.textContent = 0; 
 
+        // Make the input box empty in case there is sth there
         if (inputValue !== '') {
             inputBox.value = '';
         }
 
+        // Make bubble circles to 0
         bubbles[1].textContent = 0; 
         bubbles[2].textContent = 0; 
         bubbles[3].textContent = 0;
 
+        // Mkaing the bubble circles starting from the 2 invisible
         for(let i=1; i < bubbles.length; i++) {
             bubbles[i].classList.add('invisible')
         }
 
-        list.forEach(li => {
-            li.style.color = 'white';
+        // Not neccessaly
+        // list.forEach(li => {
+        //     li.style.color = 'white';
+        // })
+
+        spans.forEach(span => {
+            span.style.color = 'white';
         })
     })
 
